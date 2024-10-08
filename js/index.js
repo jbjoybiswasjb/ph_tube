@@ -35,6 +35,19 @@ const loadVideos = async () => {
 }
 
 
+const getCategories = async (id) => {
+    try {
+        const response = await fetch(` https://openapi.programming-hero.com/api/phero-tube/category/${id}`);
+        const data = await response.json();
+        displayVideos(data?.category);
+    }
+
+    catch (error) {
+        console.log(error);
+    }
+}
+
+
 
 
 
@@ -43,25 +56,23 @@ const loadVideos = async () => {
 
 // Display categories.
 const displayCategories = (categories) => {
-
     const btnList = document.getElementById('btn_list');
 
     categories.forEach((item) => {
-
         const li = document.createElement('li');
-        // li.innerHTML = `
-        // <button class="px-5 py-3 btn flex-nowrap bg-btnText/20 rounded text-btnText font-medium text-lg">${item?.category}</button>
-        // `;
+        li.innerHTML = `
+        <button class="px-5 py-3 btn flex-nowrap bg-btnText/20 rounded text-btnText font-medium text-lg" onclick="getCategories(${item?.category_id})">${item?.category}</button>
+        `;
 
         // const btn = document.createElement('button');
         // btn.classList.add("px-5", "py-3", "btn", "flex-nowrap", "bg-btnText/20", "rounded", "text-btnText", "font-medium", "text-lg");
         // btn.innerText = item?.category;
 
-        const btn = document.createElement('button');
-        btn.setAttribute("class", "px-5 py-3 btn flex-nowrap bg-btnText/20 rounded text-btnText font-medium text-lg")
-        btn.innerText = item?.category;
+        // const btn = document.createElement('button');
+        // btn.setAttribute("class", "px-5 py-3 btn flex-nowrap bg-btnText/20 rounded text-btnText font-medium text-lg")
+        // btn.innerText = item?.category;
+        // li.appendChild(btn);
 
-        li.appendChild(btn);
         btnList.appendChild(li);
 
     })
@@ -71,6 +82,7 @@ const displayCategories = (categories) => {
 const displayVideos = (videos) => {
 
     const phTubeVideoContainer = document.getElementById('ph_tube_video_container');
+    phTubeVideoContainer.innerHTML = '';
 
     videos.forEach(video => {
         // console.log(video);
