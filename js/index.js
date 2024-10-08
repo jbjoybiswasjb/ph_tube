@@ -1,3 +1,13 @@
+const getTime = (seconds) => {
+    const days = parseInt(seconds / 86400);
+    let remainingSeconds = seconds % 86400;
+    const hours = parseInt(remainingSeconds / 3600);
+    remainingSeconds = seconds % 3600;
+    const minutes = parseInt(remainingSeconds / 60);
+    remainingSeconds = parseInt(seconds % 60);
+    return `${days} days ${hours} hours ${minutes} minutes ${remainingSeconds} seconds ago.`;
+}
+
 // First fetch, then load, and then show/display the data.
 
 const loadCategories = async () => {
@@ -64,16 +74,18 @@ const displayVideos = (videos) => {
 
     videos.forEach(video => {
         // console.log(video);
-        console.log(video);
-
         const div = document.createElement('div');
         div.innerHTML = `
         
         <div class="relative max-w-80 h-52">
             <img src=${video?.thumbnail} alt="" class="h-full rounded-lg">
-            <p class="text-white font-normal text-xs bg-textHeading p-2 rounded inline-block bottom-3 right-3 absolute">
-                ${video?.others?.posted_date}
-            </p>
+            ${video?.others?.posted_date.length === 0 ? "" : `
+                
+                <p class="text-white font-normal text-xs bg-textHeading p-2 rounded inline-block bottom-3 right-3 absolute">
+                    ${getTime(video?.others?.posted_date)}
+                </p>                
+            `}
+            
         </div>
 
         <div class="flex flex-col md:flex-row gap-3 mt-5 md:mt-3">
