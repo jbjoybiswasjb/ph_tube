@@ -18,8 +18,21 @@ const loadCategories = async() => {
 // Display categories.
 const displayCategories = (categories) => {
 
+    const btnList = document.getElementById('btn_list');
+
     categories.forEach((item) => {
-        console.log(item);
+
+        const li = document.createElement('li');
+        // li.innerHTML = `
+        // <button class="px-5 py-3 btn flex-nowrap bg-btnText/20 rounded text-btnText font-medium text-lg">${item?.category}</button>
+        // `;
+        const btn = document.createElement('button');
+        btn.classList.add("px-5", "py-3", "btn", "flex-nowrap", "bg-btnText/20", "rounded", "text-btnText", "font-medium", "text-lg");
+        btn.innerText = item?.category;
+
+        li.appendChild(btn);
+        btnList.appendChild(li);
+
     })
 
 }
