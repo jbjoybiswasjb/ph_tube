@@ -26,8 +26,13 @@ const displayCategories = (categories) => {
         // li.innerHTML = `
         // <button class="px-5 py-3 btn flex-nowrap bg-btnText/20 rounded text-btnText font-medium text-lg">${item?.category}</button>
         // `;
+
+        // const btn = document.createElement('button');
+        // btn.classList.add("px-5", "py-3", "btn", "flex-nowrap", "bg-btnText/20", "rounded", "text-btnText", "font-medium", "text-lg");
+        // btn.innerText = item?.category;
+
         const btn = document.createElement('button');
-        btn.classList.add("px-5", "py-3", "btn", "flex-nowrap", "bg-btnText/20", "rounded", "text-btnText", "font-medium", "text-lg");
+        btn.setAttribute("class", "px-5 py-3 btn flex-nowrap bg-btnText/20 rounded text-btnText font-medium text-lg")
         btn.innerText = item?.category;
 
         li.appendChild(btn);
