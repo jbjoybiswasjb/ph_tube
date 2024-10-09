@@ -84,6 +84,21 @@ const displayVideos = (videos) => {
     const phTubeVideoContainer = document.getElementById('ph_tube_video_container');
     phTubeVideoContainer.innerHTML = '';
 
+    if (videos.length === 0) {
+        phTubeVideoContainer.classList.remove("grid");
+        phTubeVideoContainer.classList.add("flex", "justify-center", "items-center");
+        phTubeVideoContainer.innerHTML = `        
+        <div class="text-center py-24 w-5/12">
+            <img src = "../media/images/icon.png" class="mx-auto" />
+            <h2 class="text-4xl font-bold text-textHeading mt-8">Oops!! Sorry, There is no content here</h2>
+        </div>
+        `;
+        return;
+    }
+    else {
+        phTubeVideoContainer.classList.add("grid");
+    }
+
     videos.forEach(video => {
         // console.log(video);
         const div = document.createElement('div');
