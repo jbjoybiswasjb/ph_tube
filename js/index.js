@@ -159,6 +159,10 @@ const displayVideos = (videos) => {
                 </p>
             </div>
         </div>
+
+        <div class="mt-4">
+                <button class="btn">Details</button>
+        </div>
         
         `;
 
