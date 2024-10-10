@@ -8,6 +8,21 @@ const getTime = (seconds) => {
     return `${days} days ${hours} hours ${minutes} minutes ${remainingSeconds} seconds ago.`;
 }
 
+
+
+
+
+const removeBgActiveBtn = () => {
+    const categoryBtn = document.getElementsByClassName('category-btn');
+    for (const btn of categoryBtn) {
+        btn.classList.remove("bg-btnRed", "text-white");
+    }
+}
+
+
+
+
+
 // First fetch, then load, and then show/display the data.
 
 const loadCategories = async () => {
@@ -39,6 +54,18 @@ const getCategories = async (id) => {
     try {
         const response = await fetch(` https://openapi.programming-hero.com/api/phero-tube/category/${id}`);
         const data = await response.json();
+
+
+
+        // Remove bg of all active btn.
+        removeBgActiveBtn();
+
+
+        const activeBtn = document.getElementById(`btn-${id}`);
+        activeBtn.classList.remove("bg-btnText/20");
+        activeBtn.classList.add("bg-btnRed", "text-white");
+
+
         displayVideos(data?.category);
     }
 
@@ -61,7 +88,7 @@ const displayCategories = (categories) => {
     categories.forEach((item) => {
         const li = document.createElement('li');
         li.innerHTML = `
-        <button class="px-5 py-3 btn flex-nowrap bg-btnText/20 rounded text-btnText font-medium text-lg" onclick="getCategories(${item?.category_id})">${item?.category}</button>
+        <button class="px-5 py-3 btn flex-nowrap bg-btnText/20 rounded text-btnText font-medium text-lg category-btn" id="btn-${item?.category_id}" onclick="getCategories(${item?.category_id})">${item?.category}</button>
         `;
 
         // const btn = document.createElement('button');
