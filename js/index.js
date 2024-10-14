@@ -56,7 +56,6 @@ const getCategories = async (id) => {
         const data = await response.json();
 
 
-
         // Remove bg of all active btn.
         removeBgActiveBtn();
 
@@ -72,6 +71,25 @@ const getCategories = async (id) => {
     catch (error) {
         console.log(error);
     }
+}
+
+
+
+
+
+const loadDetails = async(detailsVideoId) => {
+
+    try{
+        const response = await fetch(`https://openapi.programming-hero.com/api/phero-tube/video/${detailsVideoId}`);
+        const data = await response.json();
+
+        console.log(data?.video);
+    }
+
+    catch(error) {
+        console.log(error);
+    }
+
 }
 
 
@@ -127,7 +145,6 @@ const displayVideos = (videos) => {
     }
 
     videos.forEach(video => {
-        // console.log(video);
         const div = document.createElement('div');
         div.innerHTML = `
         
@@ -161,7 +178,7 @@ const displayVideos = (videos) => {
         </div>
 
         <div class="mt-4">
-                <button class="btn">Details</button>
+                <button class="btn" onclick="loadDetails('${video?.video_id}')">Details</button>
         </div>
         
         `;
