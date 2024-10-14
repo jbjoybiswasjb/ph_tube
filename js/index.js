@@ -83,13 +83,37 @@ const loadDetails = async(detailsVideoId) => {
         const response = await fetch(`https://openapi.programming-hero.com/api/phero-tube/video/${detailsVideoId}`);
         const data = await response.json();
 
-        console.log(data?.video);
+        displayDetails(data?.video);
     }
 
     catch(error) {
         console.log(error);
     }
 
+}
+
+
+
+
+
+
+
+const displayDetails = (videoDetails) => {
+    console.log(videoDetails);
+    document.getElementById('videoDetails').showModal();
+
+    const videoDetailsContainer = document.getElementById('video_details_container');
+    videoDetailsContainer.innerHTML = '';
+    const div = document.createElement('div');
+    div.innerHTML = `
+    
+    <img src="${videoDetails?.thumbnail}" class="rounded-lg w-full">
+    <h2 class="font-bold text-3xl my-4">${videoDetails?.title}</h2>
+    <p>${videoDetails?.description}</p>
+    
+    `;
+
+    videoDetailsContainer.appendChild(div);
 }
 
 
