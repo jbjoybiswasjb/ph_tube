@@ -37,10 +37,11 @@ const loadCategories = async () => {
     }
 }
 
-const loadVideos = async () => {
+const loadVideos = async (searchText = '') => {
     try {
-        const response = await fetch('https://openapi.programming-hero.com/api/phero-tube/videos');
+        const response = await fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`);
         const data = await response.json();
+
         displayVideos(data?.videos);
     }
 
@@ -150,7 +151,7 @@ const displayVideos = (videos) => {
     const phTubeVideoContainer = document.getElementById('ph_tube_video_container');
     phTubeVideoContainer.innerHTML = '';
 
-    if (videos.length === 0) {
+    if (videos.length == 0) {
         phTubeVideoContainer.classList.remove("grid");
         phTubeVideoContainer.classList.add("flex", "justify-center", "items-center");
         phTubeVideoContainer.innerHTML = `        
@@ -210,6 +211,18 @@ const displayVideos = (videos) => {
     })
 
 }
+
+
+
+
+
+// Add search functionality.
+document.getElementById('search_field')
+    .addEventListener('keyup', (event)=>{
+
+        loadVideos(event?.target?.value);
+
+    })
 
 
 
