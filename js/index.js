@@ -99,21 +99,18 @@ const loadDetails = async(detailsVideoId) => {
 
 
 const displayDetails = (videoDetails) => {
-    console.log(videoDetails);
-    document.getElementById('videoDetails').showModal();
-
+    
     const videoDetailsContainer = document.getElementById('video_details_container');
-    videoDetailsContainer.innerHTML = '';
-    const div = document.createElement('div');
-    div.innerHTML = `
+
+    videoDetailsContainer.innerHTML = `
     
     <img src="${videoDetails?.thumbnail}" class="rounded-lg w-full">
     <h2 class="font-bold text-3xl my-4">${videoDetails?.title}</h2>
     <p>${videoDetails?.description}</p>
     
     `;
-
-    videoDetailsContainer.appendChild(div);
+    
+    document.getElementById('videoDetails').showModal();
 }
 
 
