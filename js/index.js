@@ -78,16 +78,16 @@ const getCategories = async (id) => {
 
 
 
-const loadDetails = async(detailsVideoId) => {
+const loadDetails = async (detailsVideoId) => {
 
-    try{
+    try {
         const response = await fetch(`https://openapi.programming-hero.com/api/phero-tube/video/${detailsVideoId}`);
         const data = await response.json();
 
         displayDetails(data?.video);
     }
 
-    catch(error) {
+    catch (error) {
         console.log(error);
     }
 
@@ -100,7 +100,7 @@ const loadDetails = async(detailsVideoId) => {
 
 
 const displayDetails = (videoDetails) => {
-    
+
     const videoDetailsContainer = document.getElementById('video_details_container');
 
     videoDetailsContainer.innerHTML = `
@@ -110,7 +110,7 @@ const displayDetails = (videoDetails) => {
     <p>${videoDetails?.description}</p>
     
     `;
-    
+
     document.getElementById('videoDetails').showModal();
 }
 
@@ -218,11 +218,34 @@ const displayVideos = (videos) => {
 
 // Add search functionality.
 document.getElementById('search_field')
-    .addEventListener('keyup', (event)=>{
+    .addEventListener('keyup', (event) => {
 
         loadVideos(event?.target?.value);
 
     })
+
+
+
+// Sort.
+const sortByViews = async () => {
+    const response = await fetch(`https://openapi.programming-hero.com/api/phero-tube/videos`);
+    const data = await response.json();
+    const videos = data?.videos;
+
+    const afterSort = videos.sort(function (a, b) {
+        const views = a?.others?.views;
+        const viewsNumber = views.split("K");
+        const viewsNumberFloat = parseFloat(viewsNumber)
+        
+        const viewsB = b?.others?.views;
+        const viewsNumberB = viewsB.split("K");
+        const viewsNumberFloatB = parseFloat(viewsNumberB)
+
+        return viewsNumberFloat - viewsNumberFloatB;
+    })
+
+    displayVideos (afterSort);
+}
 
 
 
