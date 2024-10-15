@@ -5,7 +5,7 @@ const getTime = (seconds) => {
     remainingSeconds = seconds % 3600;
     const minutes = parseInt(remainingSeconds / 60);
     remainingSeconds = seconds % 60;
-    return `${days} days ${hours} hours ${minutes} minutes ${remainingSeconds} seconds ago.`;
+    return `${days} days ${hours} hrs ${minutes} min ${remainingSeconds} s ago.`;
 }
 
 
